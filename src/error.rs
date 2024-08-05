@@ -8,4 +8,6 @@ pub enum Error {
     Request(#[from] reqwest::Error),
     #[error("Invalid token")]
     AccountCheck,
+    #[error("De/Serialization: {0}")]
+    Serde(#[from] serde_json::Error),
 }
