@@ -6,9 +6,12 @@ use reqwest::{
     blocking::{Client, ClientBuilder, RequestBuilder},
     Method,
 };
+use search::Searcher;
 
 pub mod error;
 pub mod models;
+pub mod search;
+pub(crate) mod utils;
 
 const BASE_URL: &str = "https://api.ebay.com/";
 
@@ -51,6 +54,10 @@ impl EbayApiClient {
 
     pub fn set_marketplace(&mut self, new: Marketplace) {
         self.marketplace = new;
+    }
+
+    pub fn search(&self) -> Searcher {
+        Searcher(self)
     }
 
     fn request_builder<S: AsRef<str>>(&self, method: Method, endpoint: S) -> RequestBuilder {
