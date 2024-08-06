@@ -71,6 +71,7 @@ impl EbayApiClient {
         Ok(client)
     }
 
+    #[allow(rustdoc::redundant_explicit_links)]
     /// Creates a new client instance using the given OAuth token and marketplace.
     ///
     /// This method will **not** check if the provided token is valid.
@@ -79,7 +80,8 @@ impl EbayApiClient {
     /// Note that if the token is invalid, all operations with this client will fail.
     ///
     /// # Panics
-    /// This function calls `unwrap()` internally when creating a [`ClientBuilder`]. This however, should never fail.
+    /// This function calls `unwrap()` internally when creating a [`ClientBuilder`](reqwest::blocking::ClientBuilder).
+    /// This however, should never fail.
     ///
     /// # Example
     /// ```rust
