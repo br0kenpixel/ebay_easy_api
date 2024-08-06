@@ -4,6 +4,7 @@ use super::{
 use chrono::Utc;
 use serde::Deserialize;
 
+/// Search results from [`Searcher::search()`](crate::search::Searcher::search).
 #[derive(Debug, Deserialize, Clone, PartialEq, PartialOrd)]
 pub struct SearchResults {
     href: Box<str>,
@@ -15,6 +16,9 @@ pub struct SearchResults {
     items: Box<[SearchItem]>,
 }
 
+/// A product from a search API result.
+///
+/// **Currently, this does not contain all fields from Ebay's API.**
 #[derive(Debug, Clone, Deserialize, PartialEq, PartialOrd)]
 pub struct SearchItem {
     #[serde(rename = "itemId")]

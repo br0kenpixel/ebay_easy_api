@@ -2,6 +2,7 @@ use serde::Deserialize;
 use std::{fmt::Display, str::FromStr};
 use thiserror::Error;
 
+/// An Ebay marketplace ID.
 #[derive(Debug, Clone, Deserialize, Copy, Default, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub enum Marketplace {
     #[default]
@@ -21,11 +22,13 @@ pub enum Marketplace {
     France,
 }
 
+/// An error representing a failed conversion from a string to a marketplace ID.
 #[derive(Debug, Error)]
 #[error("Invalid or unknown marketplace: '{0}'")]
 pub struct InvalidMarketplace(Box<str>);
 
 impl Marketplace {
+    /// Returns the marketplace ID as a static string.
     #[must_use]
     pub const fn as_str(self) -> &'static str {
         match self {

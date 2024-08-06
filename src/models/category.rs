@@ -1,5 +1,6 @@
 use serde::Deserialize;
 
+/// A category.
 #[derive(Debug, Clone, Deserialize, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Category {
     #[serde(rename = "categoryId")]

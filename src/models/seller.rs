@@ -1,6 +1,7 @@
 use serde::Deserialize;
 use serde_with::{serde_as, DisplayFromStr};
 
+/// An Ebay seller.
 #[serde_as]
 #[derive(Debug, Deserialize, Clone, PartialEq, PartialOrd)]
 pub struct Seller {
