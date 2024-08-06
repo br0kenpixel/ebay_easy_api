@@ -1,5 +1,6 @@
 use super::{
     category::Category, image::Image, marketplace::Marketplace, price::Price, seller::Seller,
+    Location,
 };
 use chrono::Utc;
 use serde::Deserialize;
@@ -42,7 +43,10 @@ pub struct SearchItem {
     // epid
     #[serde(rename = "itemWebUrl")]
     web_link: Box<str>,
-    // itemLocation
+
+    #[serde(rename = "itemLocation")]
+    location: Location,
+
     // additionalImages
     // adultOnly
     // legacyItemId
