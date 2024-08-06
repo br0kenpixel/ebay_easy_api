@@ -8,7 +8,7 @@ pub struct Searcher<'c>(pub(crate) &'c EbayApiClient);
 impl<'c> Searcher<'c> {
     pub fn search<S: AsRef<str>>(&self, query: S, limit: u16) -> Result<SearchResults> {
         let limit_as_str = limit.to_string();
-        let query = ["q", query.as_ref(), "limit", limit_as_str.as_str()];
+        let query = [("q", query.as_ref()), ("limit", limit_as_str.as_str())];
 
         let builder = self.0.request_builder(Method::GET, ENDPOINT).query(&query);
         let response = builder.send()?;
