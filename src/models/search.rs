@@ -9,13 +9,14 @@ use serde::Deserialize;
 /// Search results from [`Searcher::search()`](crate::search::Searcher::search).
 #[derive(Debug, Deserialize, Clone, PartialEq, Eq, PartialOrd, Ord)]
 pub struct SearchResults {
-    href: ReadOnlyString,
-    total: usize,
-    next: ReadOnlyString,
-    limit: usize,
-    offset: usize,
+    pub href: ReadOnlyString,
+    pub total: usize,
+    pub next: ReadOnlyString,
+    pub limit: usize,
+    pub offset: usize,
+
     #[serde(rename = "itemSummaries")]
-    items: Box<[SearchItem]>,
+    pub items: Box<[SearchItem]>,
 }
 
 /// A product from a search API result.
@@ -78,4 +79,29 @@ pub struct SearchItem {
     /// This should match whatever marketplace [`EbayApiClient`](crate::EbayApiClient) is using (or used when this item was obtained).
     #[serde(rename = "listingMarketplaceId")]
     pub listing_marketplace_id: Marketplace,
+}
+
+impl SearchResults {
+    #[must_use]
+    pub const fn len(&self) -> usize {
+        self.items.len()
+    }
+
+    #[must_use]
+    pub const fn is_empty(&self) -> bool {
+        self.len() == 0
+    }
+
+    pub fn iter(&self) -> core::slice::Iter<SearchItem> {
+        self.items.iter()
+    }
+}
+
+impl<'a> IntoIterator for &'a SearchResults {
+    type IntoIter = std::slice::Iter<'a, SearchItem>;
+    type Item = &'a SearchItem;
+
+    fn into_iter(self) -> Self::IntoIter {
+        self.items.iter()
+    }
 }
