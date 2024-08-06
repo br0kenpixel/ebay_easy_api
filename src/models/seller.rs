@@ -6,7 +6,7 @@ use std::fmt::Display;
 
 /// An Ebay seller.
 #[serde_as]
-#[derive(Debug, Deserialize, Clone, PartialEq, PartialOrd)]
+#[derive(Debug, Deserialize, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Seller {
     /// Username of the seller account.
     pub username: ReadOnlyString,

@@ -3,7 +3,7 @@ use serde::Deserialize;
 use std::ops::Deref;
 
 /// A product image URL.
-#[derive(Debug, Deserialize, Clone, PartialEq, Eq, PartialOrd, Ord)]
+#[derive(Debug, Deserialize, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Image {
     #[serde(rename = "imageUrl")]
     url: ReadOnlyString,

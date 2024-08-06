@@ -7,7 +7,7 @@ use chrono::Utc;
 use serde::Deserialize;
 
 /// Search results from [`Searcher::search()`](crate::search::Searcher::search).
-#[derive(Debug, Deserialize, Clone, PartialEq, PartialOrd)]
+#[derive(Debug, Deserialize, Clone, PartialEq, Eq, PartialOrd, Ord)]
 pub struct SearchResults {
     href: ReadOnlyString,
     total: usize,
@@ -21,7 +21,7 @@ pub struct SearchResults {
 /// A product from a search API result.
 ///
 /// **Currently, this does not contain all fields from Ebay's API.**
-#[derive(Debug, Clone, Deserialize, PartialEq, PartialOrd)]
+#[derive(Debug, Clone, Deserialize, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct SearchItem {
     /// Item ID.
     #[serde(rename = "itemId")]
@@ -37,7 +37,7 @@ pub struct SearchItem {
     /// Product price.
     pub price: Price,
 
-    /// API URl to fetch details of this product.
+    /// API URL to fetch details of this product.
     #[serde(rename = "itemHref")]
     pub(crate) item_link: ReadOnlyString,
 
