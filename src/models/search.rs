@@ -52,7 +52,9 @@ pub struct SearchItem {
     // shippingOptions
     // buyingOptions
     // epid
-    /// Direct link to the product on Ebay. *(non-API link)*
+    /// Link to the product listing on Ebay's website.
+    ///
+    /// This is **not** an API URL.
     #[serde(rename = "itemWebUrl")]
     pub web_link: ReadOnlyString,
 
