@@ -1,5 +1,5 @@
 use derive_more::Display;
-use rust_decimal::Decimal;
+use rust_decimal::{prelude::ToPrimitive, Decimal};
 use serde::Deserialize;
 use serde_with::{serde_as, DisplayFromStr};
 use std::{fmt::Display, ops::Deref};
@@ -8,9 +8,12 @@ use std::{fmt::Display, ops::Deref};
 #[serde_as]
 #[derive(Debug, Deserialize, Clone, PartialEq, Eq, PartialOrd, Ord)]
 pub struct Price {
+    /// Value.
     #[serde_as(as = "DisplayFromStr")]
-    value: Decimal,
-    currency: Currency,
+    pub value: Decimal,
+
+    /// Currency.
+    pub currency: Currency,
 }
 
 /// A currency type.
@@ -25,6 +28,24 @@ pub enum Currency {
     #[display(fmt = "HUF")]
     #[serde(rename = "HUF")]
     Forint,
+}
+
+impl Price {
+    /// Convert the price value to a [`f32`](f32).
+    ///
+    /// # Panics
+    /// This may panic if the value cannot be represented as a [`f32`](f32).
+    pub fn as_f32(&self) -> f32 {
+        self.value.to_f32().expect("cannot convert to f32")
+    }
+
+    /// Convert the price value to a [`f64`](f64).
+    ///
+    /// # Panics
+    /// This may panic if the value cannot be represented as a [`f64`](f64).
+    pub fn as_f64(&self) -> f64 {
+        self.value.to_f64().expect("cannot convert to f64")
+    }
 }
 
 impl Display for Price {
