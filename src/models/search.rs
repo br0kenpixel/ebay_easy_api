@@ -9,12 +9,13 @@ use serde::Deserialize;
 /// Search results from [`Searcher::search()`](crate::search::Searcher::search).
 #[derive(Debug, Deserialize, Clone, PartialEq, Eq, PartialOrd, Ord)]
 pub struct SearchResults {
-    pub href: ReadOnlyString,
+    /// The total number of search results.
     pub total: usize,
-    pub next: ReadOnlyString,
-    pub limit: usize,
-    pub offset: usize,
 
+    /// API URL to get the next "page" of results.
+    pub(crate) next: ReadOnlyString,
+
+    /// Search results.
     #[serde(rename = "itemSummaries")]
     pub items: Box<[SearchItem]>,
 }
