@@ -54,7 +54,7 @@ impl EbayApiClient {
     /// If want to verify the token, use [`new`](Self::new) instead.
     ///
     /// # Panics
-    /// This function calls `unwrap()` internally when creating a [`ClientBuilder`](ClientBuilder). This however, should never fail.
+    /// This function calls `unwrap()` internally when creating a [`ClientBuilder`]. This however, should never fail.
     pub fn new_unchecked<S: AsRef<str>>(token: S, marketplace: Marketplace) -> Self {
         let token = token.as_ref();
         let client = ClientBuilder::new().https_only(true).build().unwrap();

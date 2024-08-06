@@ -31,18 +31,18 @@ pub enum Currency {
 }
 
 impl Price {
-    /// Convert the price value to a [`f32`](f32).
+    /// Convert the price value to a [`f32`].
     ///
     /// # Panics
-    /// This may panic if the value cannot be represented as a [`f32`](f32).
+    /// This may panic if the value cannot be represented as a [`f32`].
     pub fn as_f32(&self) -> f32 {
         self.value.to_f32().expect("cannot convert to f32")
     }
 
-    /// Convert the price value to a [`f64`](f64).
+    /// Convert the price value to a [`f64`].
     ///
     /// # Panics
-    /// This may panic if the value cannot be represented as a [`f64`](f64).
+    /// This may panic if the value cannot be represented as a [`f64`].
     pub fn as_f64(&self) -> f64 {
         self.value.to_f64().expect("cannot convert to f64")
     }
