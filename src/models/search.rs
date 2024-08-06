@@ -1,6 +1,7 @@
 use super::{
     category::Category, image::Image, marketplace::Marketplace, price::Price, seller::Seller,
 };
+use chrono::Utc;
 use serde::Deserialize;
 
 #[derive(Debug, Deserialize, Clone, PartialEq, PartialOrd)]
@@ -18,13 +19,16 @@ pub struct SearchResults {
 pub struct SearchItem {
     #[serde(rename = "itemId")]
     id: Box<str>,
+
     title: Box<str>,
     // leafCategoryIds
     categories: Box<[Category]>,
     image: Image,
     price: Price,
+
     #[serde(rename = "itemHref")]
     item_link: Box<str>,
+
     seller: Seller,
     condition: Box<str>,
     // conditionId
@@ -39,11 +43,15 @@ pub struct SearchItem {
     // adultOnly
     // legacyItemId
     // availableCoupons
-    // itemCreationDate
+    #[serde(rename = "itemCreationDate")]
+    created_on: chrono::DateTime<Utc>,
+
     #[serde(rename = "topRatedBuyingExperience")]
     top_rated_buying_experience: bool,
+
     #[serde(rename = "priorityListing")]
     priority_listing: bool,
+
     #[serde(rename = "listingMarketplaceId")]
     listing_marketplace_id: Marketplace,
 }
