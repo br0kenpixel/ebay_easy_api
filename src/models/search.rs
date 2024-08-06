@@ -2,7 +2,7 @@ use super::{
     category::Category, image::Image, marketplace::Marketplace, price::Price, seller::Seller,
     Location,
 };
-use crate::ReadOnlyString;
+use crate::{ReadOnlyString, ReadOnlyVec};
 use chrono::Utc;
 use serde::Deserialize;
 
@@ -17,7 +17,7 @@ pub struct SearchResults {
 
     /// Search results.
     #[serde(rename = "itemSummaries")]
-    pub items: Box<[SearchItem]>,
+    pub items: ReadOnlyVec<SearchItem>,
 }
 
 /// A product from a search API result.
@@ -33,7 +33,7 @@ pub struct SearchItem {
     pub title: ReadOnlyString,
     // leafCategoryIds
     /// Product categories.
-    pub categories: Box<[Category]>,
+    pub categories: ReadOnlyVec<Category>,
     /// Product image.
     pub image: Image,
     /// Product price.

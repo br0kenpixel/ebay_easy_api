@@ -18,6 +18,9 @@ pub(crate) mod utils;
 
 /// A heap-allocated immutable string.
 pub type ReadOnlyString = Box<str>;
+/// A heap-allocated immutable array.
+pub type ReadOnlyVec<T> = Box<[T]>;
+
 const BASE_URL: &str = "https://api.ebay.com/";
 
 /// A synchronous (blocking) API client.
