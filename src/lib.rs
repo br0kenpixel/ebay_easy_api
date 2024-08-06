@@ -1,7 +1,7 @@
 #![allow(clippy::module_name_repetitions)]
 
 use error::Result;
-use models::marketplace::Marketplace;
+use models::Marketplace;
 use reqwest::{
     blocking::{Client, ClientBuilder, RequestBuilder},
     Method,

@@ -1,4 +1,4 @@
-use crate::{error::Result, models::search::SearchResults, utils::Jsonify, EbayApiClient};
+use crate::{error::Result, models::SearchResults, utils::Jsonify, EbayApiClient};
 use reqwest::Method;
 
 const ENDPOINT: &str = "buy/browse/v1/item_summary/search";

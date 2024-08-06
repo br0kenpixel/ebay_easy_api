@@ -1,4 +1,4 @@
-use ebay_easy_api::{models::marketplace::Marketplace, EbayApiClient};
+use ebay_easy_api::{models::Marketplace, EbayApiClient};
 use std::env;
 
 fn main() {
