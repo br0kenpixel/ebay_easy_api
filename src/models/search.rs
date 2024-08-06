@@ -2,15 +2,16 @@ use super::{
     category::Category, image::Image, marketplace::Marketplace, price::Price, seller::Seller,
     Location,
 };
+use crate::ReadOnlyString;
 use chrono::Utc;
 use serde::Deserialize;
 
 /// Search results from [`Searcher::search()`](crate::search::Searcher::search).
 #[derive(Debug, Deserialize, Clone, PartialEq, PartialOrd)]
 pub struct SearchResults {
-    href: Box<str>,
+    href: ReadOnlyString,
     total: usize,
-    next: Box<str>,
+    next: ReadOnlyString,
     limit: usize,
     offset: usize,
     #[serde(rename = "itemSummaries")]
@@ -24,10 +25,10 @@ pub struct SearchResults {
 pub struct SearchItem {
     /// Item ID.
     #[serde(rename = "itemId")]
-    pub id: Box<str>,
+    pub id: ReadOnlyString,
 
     /// Product name
-    pub title: Box<str>,
+    pub title: ReadOnlyString,
     // leafCategoryIds
     /// Product categories.
     pub categories: Box<[Category]>,
@@ -38,12 +39,12 @@ pub struct SearchItem {
 
     /// API URl to fetch details of this product.
     #[serde(rename = "itemHref")]
-    pub(crate) item_link: Box<str>,
+    pub(crate) item_link: ReadOnlyString,
 
     /// Basic seller information.
     pub seller: Seller,
     /// Product condition.
-    pub condition: Box<str>,
+    pub condition: ReadOnlyString,
     // conditionId
     // thumbnailImages
     // shippingOptions
@@ -51,7 +52,7 @@ pub struct SearchItem {
     // epid
     /// Direct link to the product on Ebay. *(non-API link)*
     #[serde(rename = "itemWebUrl")]
-    pub web_link: Box<str>,
+    pub web_link: ReadOnlyString,
 
     /// Origin of the product.
     #[serde(rename = "itemLocation")]

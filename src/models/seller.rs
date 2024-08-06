@@ -1,3 +1,4 @@
+use crate::ReadOnlyString;
 use rust_decimal::Decimal;
 use serde::Deserialize;
 use serde_with::{serde_as, DisplayFromStr};
@@ -8,7 +9,7 @@ use std::fmt::Display;
 #[derive(Debug, Deserialize, Clone, PartialEq, PartialOrd)]
 pub struct Seller {
     /// Username of the seller account.
-    pub username: Box<str>,
+    pub username: ReadOnlyString,
 
     /// Feedback percentage as a fixed-precision decimal number.
     #[serde_as(as = "DisplayFromStr")]

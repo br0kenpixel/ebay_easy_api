@@ -1,3 +1,4 @@
+use crate::ReadOnlyString;
 use serde::Deserialize;
 use serde_with::{serde_as, DisplayFromStr};
 
@@ -12,5 +13,5 @@ pub struct Category {
 
     /// Name of the category.
     #[serde(rename = "categoryName")]
-    pub name: Box<str>,
+    pub name: ReadOnlyString,
 }

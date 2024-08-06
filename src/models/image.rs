@@ -1,3 +1,4 @@
+use crate::ReadOnlyString;
 use serde::Deserialize;
 use std::ops::Deref;
 
@@ -5,7 +6,7 @@ use std::ops::Deref;
 #[derive(Debug, Deserialize, Clone, PartialEq, Eq, PartialOrd, Ord)]
 pub struct Image {
     #[serde(rename = "imageUrl")]
-    url: Box<str>,
+    url: ReadOnlyString,
 }
 
 impl Deref for Image {

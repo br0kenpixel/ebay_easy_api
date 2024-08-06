@@ -16,12 +16,14 @@ pub mod models;
 pub mod search;
 pub(crate) mod utils;
 
+/// A heap-allocated immutable string.
+pub type ReadOnlyString = Box<str>;
 const BASE_URL: &str = "https://api.ebay.com/";
 
 /// A synchronous (blocking) API client.
 pub struct EbayApiClient {
     client: Client,
-    token: Box<str>,
+    token: ReadOnlyString,
     marketplace: Marketplace,
 }
 

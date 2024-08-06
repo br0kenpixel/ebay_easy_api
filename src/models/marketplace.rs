@@ -1,3 +1,4 @@
+use crate::ReadOnlyString;
 use serde::Deserialize;
 use std::{fmt::Display, str::FromStr};
 use thiserror::Error;
@@ -25,7 +26,7 @@ pub enum Marketplace {
 /// An error representing a failed conversion from a string to a marketplace ID.
 #[derive(Debug, Error)]
 #[error("Invalid or unknown marketplace: '{0}'")]
-pub struct InvalidMarketplace(Box<str>);
+pub struct InvalidMarketplace(ReadOnlyString);
 
 impl Marketplace {
     /// Returns the marketplace ID as a static string.
