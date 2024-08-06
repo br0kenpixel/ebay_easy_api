@@ -26,6 +26,7 @@ pub enum Marketplace {
 pub struct InvalidMarketplace(Box<str>);
 
 impl Marketplace {
+    #[must_use]
     pub const fn as_str(self) -> &'static str {
         match self {
             Self::UnitedStates => "EBAY_US",
