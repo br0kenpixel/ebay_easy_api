@@ -30,6 +30,15 @@ pub struct InvalidMarketplace(ReadOnlyString);
 
 impl Marketplace {
     /// Returns the marketplace ID as a static string.
+    ///
+    /// # Example
+    /// ```rust
+    /// use ebay_easy_api::models::Marketplace;
+    ///
+    /// assert_eq!(Marketplace::UnitedStates.as_str(), "EBAY_US");
+    /// assert_eq!(Marketplace::Germany.as_str(), "EBAY_DE");
+    /// // ...
+    /// ```
     #[must_use]
     pub const fn as_str(self) -> &'static str {
         match self {

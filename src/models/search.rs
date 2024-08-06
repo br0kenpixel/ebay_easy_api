@@ -82,16 +82,21 @@ pub struct SearchItem {
 }
 
 impl SearchResults {
+    /// Return the amount of search results.
+    ///
+    /// Shorthand to `items.len()`.
     #[must_use]
     pub const fn len(&self) -> usize {
         self.items.len()
     }
 
+    /// Return whether the result set is empty.
     #[must_use]
     pub const fn is_empty(&self) -> bool {
         self.len() == 0
     }
 
+    /// Iterate over the search results.
     pub fn iter(&self) -> core::slice::Iter<SearchItem> {
         self.items.iter()
     }

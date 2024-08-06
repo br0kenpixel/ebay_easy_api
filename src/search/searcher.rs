@@ -14,7 +14,31 @@ impl<'c> Searcher<'c> {
     ///
     /// # Errors
     /// This can return an error if the request fails, or the response body could not be deserialized.
-    pub fn search<S: AsRef<str>>(&self, query: S, limit: u16) -> Result<SearchResults> {
+    ///
+    /// # Example
+    /// ```rust
+    /// # use ebay_easy_api::{models::Marketplace, EbayApiClient};
+    /// # use std::env::var;
+    /// # let token = var("EBAY_TOKEN").unwrap();
+    /// # let marketplace = Marketplace::UnitedStates;
+    /// let client = EbayApiClient::new_unchecked(token, marketplace);
+    ///
+    /// // Obtain a search API client
+    /// let searcher = client.search();
+    ///
+    /// // Define a limit
+    /// let limit: usize = 3;
+    ///
+    /// // Perform the search query
+    /// let results = searcher.search("gaming pc", limit);
+    ///
+    /// // If the search was successfull, we should get the results.
+    /// assert!(results.is_ok());
+    ///
+    /// // We should not get more than `limit` results.
+    /// assert!(results.unwrap().len() <= limit);
+    /// ```
+    pub fn search<S: AsRef<str>>(&self, query: S, limit: usize) -> Result<SearchResults> {
         let limit_as_str = limit.to_string();
         let query = [("q", query.as_ref()), ("limit", limit_as_str.as_str())];
 

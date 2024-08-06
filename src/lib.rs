@@ -38,6 +38,24 @@ impl EbayApiClient {
     ///
     /// # Panics
     /// This function calls [`new_unchecked`](Self::new_unchecked) internally, please refer to it's panic documentation.
+    ///
+    /// # Example
+    /// ```rust
+    /// use ebay_easy_api::{models::Marketplace, EbayApiClient};
+    /// use std::env::var;
+    ///
+    /// // Define our token
+    /// let token = var("EBAY_TOKEN").unwrap();
+    ///
+    /// // Define our marketplace
+    /// let marketplace = Marketplace::UnitedStates;
+    ///
+    /// // Build our client
+    /// let client = EbayApiClient::new(token, marketplace);
+    ///
+    /// // If the token is valid, it should return a client instance wrapped in `Result`.
+    /// assert!(client.is_ok());
+    /// ```
     pub fn new<S: AsRef<str>>(token: S, marketplace: Marketplace) -> Result<Self> {
         let client = Self::new_unchecked(token, marketplace);
 
@@ -55,8 +73,25 @@ impl EbayApiClient {
     /// This method will **not** check if the provided token is valid.
     /// If want to verify the token, use [`new`](Self::new) instead.
     ///
+    /// Note that if the token is invalid, all operations with this client will fail.
+    ///
     /// # Panics
     /// This function calls `unwrap()` internally when creating a [`ClientBuilder`]. This however, should never fail.
+    ///
+    /// # Example
+    /// ```rust
+    /// use ebay_easy_api::{models::Marketplace, EbayApiClient};
+    /// use std::env::var;
+    ///
+    /// // Define our token
+    /// let token = var("EBAY_TOKEN").unwrap();
+    ///
+    /// // Define our marketplace
+    /// let marketplace = Marketplace::UnitedStates;
+    ///
+    /// // Build our client
+    /// let client = EbayApiClient::new_unchecked(token, marketplace);
+    /// ```
     pub fn new_unchecked<S: AsRef<str>>(token: S, marketplace: Marketplace) -> Self {
         let token = token.as_ref();
         let client = ClientBuilder::new().https_only(true).build().unwrap();
