@@ -22,44 +22,59 @@ pub struct SearchResults {
 /// **Currently, this does not contain all fields from Ebay's API.**
 #[derive(Debug, Clone, Deserialize, PartialEq, PartialOrd)]
 pub struct SearchItem {
+    /// Item ID.
     #[serde(rename = "itemId")]
-    id: Box<str>,
+    pub id: Box<str>,
 
-    title: Box<str>,
+    /// Product name
+    pub title: Box<str>,
     // leafCategoryIds
-    categories: Box<[Category]>,
-    image: Image,
-    price: Price,
+    /// Product categories.
+    pub categories: Box<[Category]>,
+    /// Product image.
+    pub image: Image,
+    /// Product price.
+    pub price: Price,
 
+    /// API URl to fetch details of this product.
     #[serde(rename = "itemHref")]
-    item_link: Box<str>,
+    pub(crate) item_link: Box<str>,
 
-    seller: Seller,
-    condition: Box<str>,
+    /// Basic seller information.
+    pub seller: Seller,
+    /// Product condition.
+    pub condition: Box<str>,
     // conditionId
     // thumbnailImages
     // shippingOptions
     // buyingOptions
     // epid
+    /// Direct link to the product on Ebay. *(non-API link)*
     #[serde(rename = "itemWebUrl")]
-    web_link: Box<str>,
+    pub web_link: Box<str>,
 
+    /// Origin of the product.
     #[serde(rename = "itemLocation")]
-    location: Location,
+    pub location: Location,
 
     // additionalImages
     // adultOnly
     // legacyItemId
     // availableCoupons
+    /// Date and time of listing creation.
     #[serde(rename = "itemCreationDate")]
-    created_on: chrono::DateTime<Utc>,
+    pub created_on: chrono::DateTime<Utc>,
 
+    /// Top rated buying experience.
     #[serde(rename = "topRatedBuyingExperience")]
-    top_rated_buying_experience: bool,
+    pub top_rated_buying_experience: bool,
 
+    /// Priority listing.
     #[serde(rename = "priorityListing")]
-    priority_listing: bool,
+    pub priority_listing: bool,
 
+    /// Marketplace where listing was posted.
+    /// This should match whatever marketplace [`EbayApiClient`](crate::EbayApiClient) is using (or used when this item was obtained).
     #[serde(rename = "listingMarketplaceId")]
-    listing_marketplace_id: Marketplace,
+    pub listing_marketplace_id: Marketplace,
 }
