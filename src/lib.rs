@@ -1,4 +1,8 @@
-#![allow(clippy::missing_panics_doc, clippy::missing_errors_doc)]
+#![allow(
+    clippy::missing_panics_doc,
+    clippy::missing_errors_doc,
+    clippy::module_name_repetitions
+)]
 
 use error::Result;
 use models::marketplace::Marketplace;
@@ -54,7 +58,8 @@ impl EbayApiClient {
         self.marketplace = new;
     }
 
-    pub fn search(&self) -> Searcher {
+    #[must_use]
+    pub const fn search(&self) -> Searcher {
         Searcher(self)
     }
 
