@@ -5,6 +5,9 @@ use serde_with::{serde_as, DisplayFromStr};
 use std::{fmt::Display, ops::Deref};
 
 /// A fixed-precision decimal number representation of a price value.
+///
+/// Check the [`rust_decimal`](https://docs.rs/rust_decimal/latest/rust_decimal/) crate for
+/// more details on the [`Decimal`](https://docs.rs/rust_decimal/latest/rust_decimal/struct.Decimal.html) type.
 #[serde_as]
 #[derive(Debug, Deserialize, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Price {
