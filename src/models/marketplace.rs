@@ -1,30 +1,70 @@
-use derive_more::Display;
 use serde::Deserialize;
+use std::{fmt::Display, str::FromStr};
+use thiserror::Error;
 
-#[derive(
-    Debug, Clone, Deserialize, Copy, Default, PartialEq, Eq, PartialOrd, Ord, Hash, Display,
-)]
+#[derive(Debug, Clone, Deserialize, Copy, Default, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub enum Marketplace {
     #[default]
     #[serde(rename = "EBAY_US")]
-    #[display(fmt = "EBAY_US")]
     UnitedStates,
     #[serde(rename = "EBAY_DE")]
-    #[display(fmt = "EBAY_DE")]
     Germany,
     #[serde(rename = "EBAY_IT")]
-    #[display(fmt = "EBAY_IT")]
     Italy,
     #[serde(rename = "EBAY_IR")]
-    #[display(fmt = "EBAY_IR")]
     Ireland,
     #[serde(rename = "EBAY_SG")]
-    #[display(fmt = "EBAY_SG")]
     Singapore,
     #[serde(rename = "EBAY_UK")]
-    #[display(fmt = "EBAY_UK")]
     UnitedKingdom,
     #[serde(rename = "EBAY_FR")]
-    #[display(fmt = "EBAY_FR")]
     France,
+}
+
+#[derive(Debug, Error)]
+#[error("Invalid or unknown marketplace: '{0}'")]
+pub struct InvalidMarketplace(Box<str>);
+
+impl Marketplace {
+    pub const fn as_str(self) -> &'static str {
+        match self {
+            Self::UnitedStates => "EBAY_US",
+            Self::Germany => "EBAY_DE",
+            Self::Italy => "EBAY_IT",
+            Self::Ireland => "EBAY_IR",
+            Self::Singapore => "EBAY_SG",
+            Self::UnitedKingdom => "EBAY_UK",
+            Self::France => "EBAY_FR",
+        }
+    }
+}
+
+impl FromStr for Marketplace {
+    type Err = InvalidMarketplace;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        const VARIANTS: [Marketplace; 7] = [
+            Marketplace::UnitedStates,
+            Marketplace::Germany,
+            Marketplace::Italy,
+            Marketplace::Ireland,
+            Marketplace::Singapore,
+            Marketplace::UnitedKingdom,
+            Marketplace::France,
+        ];
+
+        for variant in VARIANTS {
+            if s == variant.as_str() {
+                return Ok(variant);
+            }
+        }
+
+        Err(InvalidMarketplace(s.into()))
+    }
+}
+
+impl Display for Marketplace {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.as_str())
+    }
 }
