@@ -10,4 +10,14 @@ pub struct Location {
 
     /// Country code.
     pub country: ReadOnlyString,
+
+    /// State or province.
+    /// Some API calls dont provide this.
+    #[serde(rename = "stateOrProvince")]
+    pub state: Option<ReadOnlyString>,
+
+    /// City.
+    /// Some API calls dont provide this.
+    #[serde(rename = "city")]
+    pub city: Option<ReadOnlyString>,
 }
