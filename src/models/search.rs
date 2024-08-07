@@ -17,6 +17,7 @@ pub struct SearchResults {
 
     /// Search results.
     #[serde(rename = "itemSummaries")]
+    #[serde(default)]
     pub items: ReadOnlyVec<SearchItem>,
 }
 
