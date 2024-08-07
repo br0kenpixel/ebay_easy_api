@@ -12,8 +12,8 @@ pub struct SearchResults {
     /// The total number of search results.
     pub total: usize,
 
-    /// API URL to get the next "page" of results.
-    pub(crate) next: ReadOnlyString,
+    /// API URL to get the next "page" of results. This may be [`None`] if there is no next page.
+    pub(crate) next: Option<ReadOnlyString>,
 
     /// Search results.
     #[serde(rename = "itemSummaries")]
