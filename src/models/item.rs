@@ -4,40 +4,42 @@ use chrono::Utc;
 use serde::Deserialize;
 use serde_with::{serde_as, DisplayFromStr};
 
+/// A detailed item.
+/// This can be obtained using [`Searcher::find_item()`](crate::search::Searcher::find_item).
 #[serde_as]
 #[derive(Debug, Clone, Deserialize, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Item {
     /// ID of the item.
     #[serde(rename = "itemId")]
-    id: ReadOnlyString,
+    pub id: ReadOnlyString,
 
     /// Seller item revision.
     #[serde(rename = "sellerItemRevision")]
     #[serde_as(as = "DisplayFromStr")]
-    revision: u8,
+    pub revision: u8,
 
     /// Title.
-    title: ReadOnlyString,
+    pub title: ReadOnlyString,
 
     /// Price.
-    price: Price,
+    pub price: Price,
 
     /// Category paths.
     #[serde(rename = "categoryPath")]
     #[serde_as(as = "DisplayFromStr")]
-    category_path: CategoryPath,
+    pub category_path: CategoryPath,
 
     // categoryIdPath
     /// Condition.
-    condition: ReadOnlyString,
+    pub condition: ReadOnlyString,
 
     /// Condition ID.
     #[serde(rename = "conditionId")]
     #[serde_as(as = "DisplayFromStr")]
-    condition_id: u32,
+    pub condition_id: u32,
 
     #[serde(rename = "itemLocation")]
-    location: Location,
+    pub location: Location,
 
     /// Image URL.
     pub image: Image,
