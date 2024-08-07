@@ -1,6 +1,6 @@
 #![allow(clippy::module_name_repetitions)]
 
-use error::Result;
+use error::{handle_response_error, Result};
 use models::Marketplace;
 use reqwest::{
     blocking::{Client, ClientBuilder, RequestBuilder},
@@ -66,7 +66,7 @@ impl EbayApiClient {
             .request_builder(Method::GET, "sell/account/v1/subscription")
             .send()?;
 
-        response.error_for_status()?;
+        handle_response_error(response)?;
 
         Ok(client)
     }

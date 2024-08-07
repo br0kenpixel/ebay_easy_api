@@ -1,5 +1,5 @@
 use crate::{
-    error::Result,
+    error::{handle_response_error, Result},
     models::{Item, SearchResults},
     utils::Jsonify,
     EbayApiClient,
@@ -54,7 +54,7 @@ impl<'c> Browser<'c> {
             .query(&query);
         let response = builder.send()?;
 
-        let response = response.error_for_status()?;
+        let response = handle_response_error(response)?;
         let response = response.jsonify::<SearchResults>()?;
 
         Ok(response)
@@ -94,14 +94,14 @@ impl<'c> Browser<'c> {
 
         let response = builder.send()?;
 
-        match response.error_for_status() {
+        match handle_response_error(response) {
             Ok(response) => Ok(Some(response.jsonify()?)),
             Err(why) => {
-                if why.status() == Some(StatusCode::NOT_FOUND) {
+                if why.status_code() == Some(StatusCode::NOT_FOUND) {
                     return Ok(None);
                 }
 
-                Err(why.into())
+                Err(why)
             }
         }
     }
