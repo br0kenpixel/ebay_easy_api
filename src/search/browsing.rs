@@ -9,13 +9,13 @@ use reqwest::{Method, StatusCode};
 const SEARCH_ENDPOINT: &str = "buy/browse/v1/item_summary/search";
 const ITEM_SEARCH_ENDPOINT: &str = "buy/browse/v1/item/";
 
-/// A Search API client.
+/// A Browser API client.
 ///
 /// This structure references an instance of [`EbayApiClient`](EbayApiClient), so
 /// it can only be used as long as the referenced [`EbayApiClient`](EbayApiClient) lives.
-pub struct Searcher<'c>(pub(crate) &'c EbayApiClient);
+pub struct Browser<'c>(pub(crate) &'c EbayApiClient);
 
-impl<'c> Searcher<'c> {
+impl<'c> Browser<'c> {
     /// Perform a search using the given query string and return up to `limit` results.
     ///
     /// # Errors
@@ -30,13 +30,13 @@ impl<'c> Searcher<'c> {
     /// let client = EbayApiClient::new_unchecked(token, marketplace);
     ///
     /// // Obtain a search API client
-    /// let searcher = client.search();
+    /// let browser = client.search();
     ///
     /// // Define a limit
     /// let limit: usize = 3;
     ///
     /// // Perform the search query
-    /// let results = searcher.search("gaming pc", limit);
+    /// let results = browser.search("gaming pc", limit);
     ///
     /// // If the search was successfull, we should get the results.
     /// assert!(results.is_ok());
@@ -75,10 +75,10 @@ impl<'c> Searcher<'c> {
     /// let client = EbayApiClient::new_unchecked(token, marketplace);
     ///
     /// // Obtain a search API client
-    /// let searcher = client.search();
+    /// let browser = client.search();
     ///
     /// // Perform the search query
-    /// let result = searcher.find_item("v1|202975928242|0");
+    /// let result = browser.find_item("v1|202975928242|0");
     ///
     /// // If the search was successfull, we should get the results.
     /// assert!(result.is_ok());

@@ -1,3 +1,3 @@
-mod searcher;
+mod browsing;
 
-pub use searcher::Searcher;
+pub use browsing::Browser;

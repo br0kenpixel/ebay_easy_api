@@ -6,8 +6,8 @@ fn main() {
     let marketplace = Marketplace::UnitedStates;
     let client = EbayApiClient::new(token, marketplace).unwrap();
 
-    let searcher = client.search();
-    let results = searcher.search("omnron plc", 3).unwrap();
+    let browser = client.search();
+    let results = browser.search("omnron plc", 3).unwrap();
 
     println!("{results:#?}");
 }

@@ -6,10 +6,8 @@ fn empty_search() {
     let client =
         EbayApiClient::new_unchecked(var("EBAY_TOKEN").unwrap(), Marketplace::UnitedStates);
 
-    let searcher = client.search();
-    let results = searcher
-        .search("kjefbasrfbsifebfoubefiuwbfwuf", 10)
-        .unwrap();
+    let browser = client.search();
+    let results = browser.search("kjefbasrfbsifebfoubefiuwbfwuf", 10).unwrap();
 
     assert!(results.items.is_empty());
     assert_eq!(results.total, 0);

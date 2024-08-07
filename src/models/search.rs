@@ -6,7 +6,7 @@ use crate::{ReadOnlyString, ReadOnlyVec};
 use chrono::Utc;
 use serde::Deserialize;
 
-/// Search results from [`Searcher::search()`](crate::search::Searcher::search).
+/// Search results from [`Browser::search()`](crate::search::Browser::search).
 #[derive(Debug, Deserialize, Clone, PartialEq, Eq, PartialOrd, Ord)]
 pub struct SearchResults {
     /// The total number of search results.

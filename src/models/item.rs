@@ -5,7 +5,7 @@ use serde::Deserialize;
 use serde_with::{serde_as, DisplayFromStr};
 
 /// A detailed item.
-/// This can be obtained using [`Searcher::find_item()`](crate::search::Searcher::find_item).
+/// This can be obtained using [`Browser::find_item()`](crate::search::Browser::find_item).
 #[allow(clippy::struct_excessive_bools)]
 #[serde_as]
 #[derive(Debug, Clone, Deserialize, PartialEq, Eq, PartialOrd, Ord, Hash)]

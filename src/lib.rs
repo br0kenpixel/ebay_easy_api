@@ -6,7 +6,7 @@ use reqwest::{
     blocking::{Client, ClientBuilder, RequestBuilder},
     Method,
 };
-use search::Searcher;
+use search::Browser;
 
 /// Error types.
 pub mod error;
@@ -121,8 +121,8 @@ impl EbayApiClient {
 
     /// Returns a Search API client. Refer to the [search api](crate::search) documentation.
     #[must_use]
-    pub const fn search(&self) -> Searcher {
-        Searcher(self)
+    pub const fn search(&self) -> Browser {
+        Browser(self)
     }
 
     fn request_builder<S: AsRef<str>>(&self, method: Method, endpoint: S) -> RequestBuilder {
