@@ -97,7 +97,7 @@ impl<'c> Searcher<'c> {
         match response.error_for_status() {
             Ok(response) => Ok(Some(response.jsonify()?)),
             Err(why) => {
-                if let Some(StatusCode::NOT_FOUND) = why.status() {
+                if why.status() == Some(StatusCode::NOT_FOUND) {
                     return Ok(None);
                 }
 

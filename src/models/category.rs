@@ -25,14 +25,14 @@ impl FromStr for CategoryPath {
     type Err = Infallible;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        Ok(Self(s.split('|').map(|value| value.into()).collect()))
+        Ok(Self(s.split('|').map(Into::into).collect()))
     }
 }
 
 impl Display for CategoryPath {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         for (i, item) in self.0.iter().enumerate() {
-            write!(f, "{}", item)?;
+            write!(f, "{item}")?;
 
             if i < (self.0.len() - 1) {
                 write!(f, "|")?;
